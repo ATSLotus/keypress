@@ -1,0 +1,27 @@
+{
+  "name": "@atsltotus/keypress",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "watch": "rm -rf dist/* && rollup -c -w",
+    "build": "rm -rf dist/* && rollup -c "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "files":[
+    "dist"
+  ],
+  "dependencies": {
+    
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.5",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-typescript2": "^0.34.1"
+  }
+}

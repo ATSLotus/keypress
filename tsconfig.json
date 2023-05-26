@@ -1,0 +1,32 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "./dist/types",
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "strict": true,
+        "esModuleInterop": false,
+        "outDir": "out-tsc",
+        "rootDir": "./src",
+        "allowJs": true,
+        "noImplicitAny": false,
+        "typeRoots": [
+            "node_modules/@types",
+            "@types"
+        ]
+    },
+    "include": [
+        "src/**/*.ts",
+        "src/*.ts"
+    ],
+    "exclude": [
+        "node_modules/**",
+        "**/node_modules/**"
+    ]
+}
