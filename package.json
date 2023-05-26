@@ -1,22 +1,29 @@
 {
-  "name": "@atsltotus/keypress",
-  "version": "1.0.0",
+  "name": "@atslotus/keypress",
+  "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/index.js",
   "type": "module",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "watch": "rm -rf dist/* && rollup -c -w",
-    "build": "rm -rf dist/* && rollup -c "
+    "build": "rm -rf dist/* && rollup -c ",
+    "prepublic:publish": "npm run build && npm version patch -f",
+    "public:publish": "npm publish -f"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "directory": "https://github.com/ATSLotus/keypress"
+  },
+  "keywords": [
+    "keypress"
+  ],
+  "author": "ATSLotus",
   "license": "ISC",
-  "files":[
+  "files": [
     "dist"
   ],
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^18.15.5",
     "@rollup/plugin-babel": "^6.0.3",
