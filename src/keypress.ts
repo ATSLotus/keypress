@@ -1,5 +1,5 @@
 import combination from "./combination"
-import { judgeComb, getComb } from "./judgeComb"
+import { judgeComb, getComb, preprocesseSkip } from "./judgeComb"
 
 // const KeyType = new Set(['keydown', 'keyup', 'keypress'])
 
@@ -35,7 +35,7 @@ export default class keypress {
                             keyevent.callback(event)
                     }
                 } else if(keyevent.skip) {
-                    const SKIP = new Set(keyevent.skip)
+                    const SKIP = preprocesseSkip(keyevent.skip)
                     const key = `${getComb(event)}${event.key.toLowerCase()}`
                     if(!SKIP.has(key))
                         keyevent.callback(event)

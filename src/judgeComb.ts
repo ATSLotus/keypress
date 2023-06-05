@@ -32,7 +32,31 @@ const getComb = (event: KeyboardEvent): string => {
     }
 }
 
+const preprocesseSkip = (skip: Array<string>) => {
+    let set = new Set([...skip])
+    skip.forEach(item => {
+        switch(true) {
+            case item.startsWith("alt"): 
+                set.add("alt")
+                break
+            case item.startsWith("shift"): 
+                set.add("shift")
+                break
+            case item.startsWith("ctrl"): 
+                set.add("ctrl")
+                break
+            case item.startsWith("meta"): 
+                set.add("meta")
+                break
+            default:
+                break
+        }
+    })
+    return set
+}
+
 export { 
     judgeComb,
-    getComb
+    getComb,
+    preprocesseSkip
 }
