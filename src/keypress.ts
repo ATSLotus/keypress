@@ -1,5 +1,5 @@
 import combination from "./combination"
-import judgeComb from "./judgeComb"
+import { judgeComb, getComb } from "./judgeComb"
 
 // const KeyType = new Set(['keydown', 'keyup', 'keypress'])
 
@@ -7,8 +7,9 @@ type Keys = string
 interface KEYEVENT {
     type: 'keydown'|'keyup'|'keypress'
     key?: Keys, 
+    skip?: Array<Keys>
     callback: (event: KeyboardEvent) => void, 
-    useCombination?: "alt"|"shift"|"ctrl"|"mate"
+    useCombination?: "alt"|"shift"|"ctrl"|"meta"
     isDestroy?: boolean
 }
 interface LISTENNER {
@@ -33,8 +34,11 @@ export default class keypress {
                         if(judgeComb(false, event) && event.key.toLowerCase() === keyevent.key.toLowerCase()) 
                             keyevent.callback(event)
                     }
-                } else {
-                    keyevent.callback(event)
+                } else if(keyevent.skip) {
+                    const SKIP = new Set(keyevent.skip)
+                    const key = `${getComb(event)}${event.key.toLowerCase()}`
+                    if(!SKIP.has(key))
+                        keyevent.callback(event)
                 }
                 if(keyevent.isDestroy) 
                     document.removeEventListener(keyevent.type, listener)

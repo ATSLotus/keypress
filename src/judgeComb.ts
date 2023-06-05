@@ -17,4 +17,22 @@ const judgeComb = (comb: string | false, event: KeyboardEvent): boolean => {
     return res
 }
 
-export default judgeComb
+const getComb = (event: KeyboardEvent): string => {
+    switch (true) {
+        case event.altKey:
+            return 'alt'
+        case event.shiftKey:
+            return 'shift'
+        case event.ctrlKey:
+            return 'ctrl'
+        case event.metaKey:
+            return 'meta'
+        default:
+            return ''
+    }
+}
+
+export { 
+    judgeComb,
+    getComb
+}
