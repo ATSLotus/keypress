@@ -6,8 +6,8 @@ import judgeComb from "./judgeComb"
 type Keys = string
 interface KEYEVENT {
     type: 'keydown'|'keyup'|'keypress'
-    key: Keys, 
-    callback: () => void, 
+    key?: Keys, 
+    callback: (event: KeyboardEvent) => void, 
     useCombination?: "alt"|"shift"|"ctrl"|"mate"
     isDestroy?: boolean
 }
@@ -24,13 +24,17 @@ export default class keypress {
     listen(keyevents: KEYEVENT | Array<KEYEVENT>) {
         const listenner = (keyevent: KEYEVENT) => {
             const listener = (event: KeyboardEvent) => {
-                if(keyevent.useCombination) {
-                    const comb = combination.get(keyevent.useCombination) as string
-                    if(judgeComb(comb, event) && event.key.toLowerCase() === keyevent.key.toLowerCase()) 
-                        keyevent.callback()
+                if(keyevent.key) {
+                    if(keyevent.useCombination) {
+                        const comb = combination.get(keyevent.useCombination) as string
+                        if(judgeComb(comb, event) && event.key.toLowerCase() === keyevent.key.toLowerCase()) 
+                            keyevent.callback(event)
+                    } else {
+                        if(judgeComb(false, event) && event.key.toLowerCase() === keyevent.key.toLowerCase()) 
+                            keyevent.callback(event)
+                    }
                 } else {
-                    if(judgeComb(false, event) && event.key.toLowerCase() === keyevent.key.toLowerCase()) 
-                        keyevent.callback()
+                    keyevent.callback(event)
                 }
                 if(keyevent.isDestroy) 
                     document.removeEventListener(keyevent.type, listener)
@@ -58,7 +62,7 @@ export default class keypress {
                 document.addEventListener(keyevents.type, lisn)
             }
         } catch (error) {
-            throw Error(`Use the correct parameters: {key: string | number, callback: () => void, isDestroy?: boolean}, please!`)
+            throw Error(`Use the correct parameters: {key: string | number, callback: (event: KeyboardEvent) => void, isDestroy?: boolean}, please!`)
         }
     }
     clean(key?: string) {
