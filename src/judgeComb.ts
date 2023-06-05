@@ -33,24 +33,25 @@ const getComb = (event: KeyboardEvent): string => {
 }
 
 const preprocesseSkip = (skip: Array<string>) => {
-    let set = new Set([...skip])
+    let set = new Set()
     skip.forEach(item => {
         switch(true) {
             case item.startsWith("alt"): 
-                set.add("alt")
+                set.add("altalt")
                 break
             case item.startsWith("shift"): 
-                set.add("shift")
+                set.add("shiftshift")
                 break
             case item.startsWith("ctrl"): 
-                set.add("ctrl")
+                set.add("ctrlctrl")
                 break
             case item.startsWith("meta"): 
-                set.add("meta")
+                set.add("metameta")
                 break
             default:
                 break
         }
+        set.add(item.toLowerCase())
     })
     return set
 }
